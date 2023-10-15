@@ -1,10 +1,10 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 import { Button } from "react-bootstrap";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 export default function Todo() {
-  const[cdate,setCdate]=useState(new Date())
+  const [cdate, setCdate] = useState(new Date())
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [task1, setTask1] = useState("");
@@ -13,29 +13,22 @@ export default function Todo() {
   const [task4, setTask4] = useState("");
   const [task5, setTask5] = useState("");
 
-  useEffect(()=>{
-      const timer = setInterval(()=>setCdate(new Date()),1000)
-      return function cleanup(){
-        clearInterval(timer)
-      }
-  },[])
-
-
-  const data = { title, task1, task2, task3, task4, task5, date }; // for stringfy
-  function saveData() {
-    fetch("http://localhost:3000/To-do", {
+  useEffect(() => {
+    const timer = setInterval(() => setCdate(new Date()), 1000)
+    return function cleanup() {
+      clearInterval(timer)
+    }
+  }, [])
+  const saveData = async () => {
+    let result = await fetch("http://localhost:5000/post", {
       method: "Post",
+      body: JSON.stringify({ title, date, task1, task2, task3, task4, task5 }),
       headers: {
-        Accept: "application/json",
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({data}),
-    }).then((result) => {
-      console.log(result);
-      result.json().then((res) => {
-        console.log(res);
-      });
-    });
+        "content-type": "application/json"
+      }
+    })
+    result = await result.json()
+    console.log(result);
   }
   return (
     <div>
@@ -111,15 +104,15 @@ export default function Todo() {
           />
         </Form.Group>
 
-        <Button  onClick={() => saveData()}>
-         <Link to={'/gettodo'} className="link">Get to do</Link>
-          
+        <Button onClick={saveData}>
+          <Link to={'/gettodo'} className="link">Get to do</Link>
+
         </Button>
       </Form>
       <div className="time">
-        <h6>Time : { cdate.toLocaleTimeString()}</h6>
+        <h6>Time : {cdate.toLocaleTimeString()}</h6>
         <p>Date : {cdate.toLocaleDateString()}</p>
-        </div>
+      </div>
     </div>
   );
 }
