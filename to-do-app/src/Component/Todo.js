@@ -2,6 +2,7 @@ import React from "react";
 import { Form } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { useState,useEffect } from "react";
+import { Link } from "react-router-dom";
 export default function Todo() {
   const[cdate,setCdate]=useState(new Date())
   const [title, setTitle] = useState("");
@@ -110,8 +111,9 @@ export default function Todo() {
           />
         </Form.Group>
 
-        <Button variant="primary" className="submit" onClick={() => saveData()}>
-          Save
+        <Button  onClick={() => saveData()}>
+         <Link to={'/gettodo'} className="link">Get to do</Link>
+          
         </Button>
       </Form>
       <div className="time">

@@ -14,3 +14,11 @@ code {
 .Item{
   margin: 4px;
 }
+.link{
+  
+  color: black  ;
+  text-decoration: none;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  width: max-content;
+  font-weight: 300;
+}

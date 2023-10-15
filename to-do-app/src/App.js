@@ -1,12 +1,16 @@
 
 import './App.css';
-import Todo from './Component.js/Todo';
-import GetTodo from './Component.js/GetTodo';
+import Todo from './Component/Todo'
+import GetTodo from './Component/GetTodo';
+import {Routes,Route} from 'react-router-dom'
 function App() {
   return (
     <div  >
-     <Todo/> <br/>
-     <GetTodo/>
+      <Routes>
+          <Route path='/' element={<Todo/>}/>
+          <Route path='/gettodo' element={<GetTodo/>}/>
+      </Routes>
+     
     </div>
   );
 }
